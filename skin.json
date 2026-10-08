@@ -1,6 +1,6 @@
 {
 	"name": "Dusk",
-	"version": "4.3.6",
+	"version": "4.4",
 	"author": [
 		"Gregory S. Hayes",
 		"Becca Wei",
@@ -12,8 +12,9 @@
 	"license-name": "GPL-2.0-or-later",
 	"type": "skin",
 	"requires": {
-		"MediaWiki": ">= 1.43.0"
+		"MediaWiki": ">= 1.36.0"
 	},
+	"callback": "MediaWiki\\Skin\\Dusk\\DuskHooks::onRegistration",
 	"ValidSkinNames": {
 		"dusk": {
 			"displayname": "Dusk",
@@ -21,23 +22,26 @@
 			"args": [ {
 				"name": "dusk",
 				"bodyOnly": true,
-				"template": "DuskTemplate",
+				"template": "MediaWiki\\Skin\\Dusk\\DuskTemplate",
 				"styles": [
 					"skins.dusk"
 				]
 			} ]
 		}
 	},
+	"attributes": {
+		"Theme": {
+			"Modules": {
+				"dusk": [
+					"green"
+				]
+			}
+		}
+	},
 	"MessagesDirs": {
 		"SkinDusk": [
 			"i18n"
 		]
-	},
-	"ThemeModules": {
-		"dusk": [ "green" ]
-	},
-	"AutoloadClasses": {
-		"DuskTemplate": "includes/DuskTemplate.php"
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
@@ -86,5 +90,8 @@
 			"+ext.socialprofile.special.givegift.css": "resources/css/extensions/ext.socialprofile.special.givegift.css"
 		}
 	},
-	"manifest_version": 1
+	"AutoloadNamespaces": {
+		"MediaWiki\\Skin\\Dusk\\": "includes/"
+	},
+	"manifest_version": 2
 }

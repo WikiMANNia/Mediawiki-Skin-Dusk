@@ -7,9 +7,14 @@
  * @ingroup Skins
  */
 
+namespace MediaWiki\Skin\Dusk;
+
 use MediaWiki\Html\Html;
 use MediaWiki\Linker\Linker;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Parser\Sanitizer;
+use MediaWiki\Skin\BaseTemplate;
+use MediaWiki\SpecialPage\SpecialPage;
 
 class DuskTemplate extends BaseTemplate {
 	/**
@@ -20,8 +25,9 @@ class DuskTemplate extends BaseTemplate {
 	 */
 	public function execute() {
 		$skin = $this->getSkin();
+		$title = $skin->getTitle();
 
-		$this->data['pageLanguage'] = $skin->getTitle()->getPageLanguage()->getHtmlCode();
+		$this->data['pageLanguage'] = $title->getPageLanguage()->getHtmlCode();
 
 ?><div id="globalWrapper">
 		<div id="header">
@@ -117,6 +123,7 @@ class DuskTemplate extends BaseTemplate {
 	 */
 	protected function renderPortals( $sidebar ) {
 		if ( !isset( $sidebar['SEARCH'] ) ) {
+			// @phan-suppress-next-line PhanTypeMismatchDimAssignment
 			$sidebar['SEARCH'] = true;
 		}
 		if ( !isset( $sidebar['TOOLBOX'] ) ) {
