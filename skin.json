@@ -1,6 +1,6 @@
 {
 	"name": "Dusk",
-	"version": "4.4",
+	"version": "4.5",
 	"author": [
 		"Gregory S. Hayes",
 		"Becca Wei",
@@ -22,6 +22,16 @@
 			"args": [ {
 				"name": "dusk",
 				"bodyOnly": true,
+				"menus": [
+					"user-page",
+					"user-interface-preferences",
+					"user-menu",
+					"notifications",
+					"associated-pages",
+					"views",
+					"actions",
+					"variants"
+				],
 				"template": "MediaWiki\\Skin\\Dusk\\DuskTemplate",
 				"styles": [
 					"skins.dusk"

@@ -70,3 +70,10 @@ Version 4.4 - Oct 7, 2026
 - Add file ´Compat.php´
 - Add backward compatibility to REL1_36
 - Migrated ´skin.json´ from manifest version 1 to manifest version 2.
+
+Version 4.5 - Nov 12, 2026
+
+- Migrate Dusk to modern skin menus
+- Declare the modern menus skin option in skin.json and build personal tools from content_navigation instead of the deprecated
+- getPersonalTools().
+- Build the content actions list from content_navigation instead of the deprecated content_actions template variable, keeping the same menu order and dropping redundant tabs as core did.

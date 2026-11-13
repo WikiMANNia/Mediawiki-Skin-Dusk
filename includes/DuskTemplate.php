@@ -68,7 +68,21 @@ class DuskTemplate extends BaseTemplate {
 				<h5><?php $this->msg( 'personaltools' ) ?></h5>
 				<div class="pBody">
 					<ul<?php $this->html( 'userlangattributes' ) ?>>
-<?php				foreach ( $this->getPersonalTools() as $key => $item ) {
+<?php
+					if ( version_compare( MW_VERSION, 1.46, '<' ) ) {
+						$personalTools = $this->getPersonalTools();
+					} else {
+						$contentNav = $this->get( 'content_navigation' );
+						$personalTools = $this->getSkin()->getPersonalToolsForMakeListItem(
+							array_merge(
+								$contentNav['user-interface-preferences'],
+								$contentNav['user-page'],
+								$contentNav['notifications'],
+								$contentNav['user-menu']
+							)
+						);
+					}
+					foreach ( $personalTools as $key => $item ) {
 						echo $this->makeListItem( $key, $item );
 					}
 ?>
@@ -123,7 +137,6 @@ class DuskTemplate extends BaseTemplate {
 	 */
 	protected function renderPortals( $sidebar ) {
 		if ( !isset( $sidebar['SEARCH'] ) ) {
-			// @phan-suppress-next-line PhanTypeMismatchDimAssignment
 			$sidebar['SEARCH'] = true;
 		}
 		if ( !isset( $sidebar['TOOLBOX'] ) ) {
@@ -183,7 +196,18 @@ class DuskTemplate extends BaseTemplate {
 		<h5><?php $this->msg( 'views' ) ?></h5>
 		<div class="pBody">
 			<ul><?php
-				foreach ( $this->data['content_actions'] as $key => $tab ) {
+				if ( version_compare( MW_VERSION, 1.46, '<' ) ) {
+					$content_actions = $this->data['content_actions'];
+				} else {
+					$ca = $this->get( 'content_navigation' );
+					$content_actions = array_merge(
+						$ca['views'],
+						$ca['associated-pages'],
+						$ca['actions'],
+						$ca['variants']
+					);
+				}
+				foreach ( $content_actions as $key => $tab ) {
 					echo $this->makeListItem( $key, $tab );
 				}
 				?>
